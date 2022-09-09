@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <Title>Bonsai - ArUco Design Library</Title>
+    <Description>Bonsai Design Library containing visualizer and editor classes for ArUco configuration.</Description>
+    <PackageTags>Bonsai Rx Rx ArUco Marker Augmented Reality Visualizers</PackageTags>
+    <TargetFramework>net462</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Version>3.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bonsai.Vision.Design" Version="2.6.1" />
+    <PackageReference Include="Aruco.Net" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bonsai.Aruco\Bonsai.Aruco.csproj" />
+  </ItemGroup>
+
+</Project>
