@@ -5,16 +5,12 @@ using Bonsai.Design;
 using Bonsai.Vision.Design;
 using OpenCV.Net;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-[assembly: TypeVisualizer(typeof(MarkerMashupVisualizer), Target = typeof(VisualizerMashup<IplImageVisualizer, MarkerVisualizer>))]
+[assembly: TypeVisualizer(typeof(MarkerOverlay), Target = typeof(MashupSource<IplImageVisualizer, MarkerVisualizer>))]
 
 namespace Bonsai.Aruco.Design
 {
-    public class MarkerMashupVisualizer : MashupTypeVisualizer
+    public class MarkerOverlay : DialogTypeVisualizer
     {
         IplImageVisualizer visualizer;
 
@@ -30,7 +26,7 @@ namespace Bonsai.Aruco.Design
 
         public override void Load(IServiceProvider provider)
         {
-            visualizer = (IplImageVisualizer)provider.GetService(typeof(DialogMashupVisualizer));
+            visualizer = (IplImageVisualizer)provider.GetService(typeof(MashupVisualizer));
         }
 
         public override void Unload()

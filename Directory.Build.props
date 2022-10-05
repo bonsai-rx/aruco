@@ -10,7 +10,7 @@
     <IncludeSymbols Condition="'$(Configuration)'=='Release'">true</IncludeSymbols>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <PackageOutputPath>..\bin\$(Configuration)</PackageOutputPath>
-    <VersionSuffix></VersionSuffix>
+    <VersionSuffix>rc2</VersionSuffix>
     <Features>strict</Features>
   </PropertyGroup>
 </Project>
