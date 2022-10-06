@@ -56,14 +56,11 @@ namespace Bonsai.Aruco
         {
             return Observable.Defer(() =>
             {
+                var detector = new MarkerDetector();
+                CameraParameters parameters = null;
                 Mat cameraMatrix = null;
                 Mat distortion = null;
-                CameraParameters parameters = null;
-                var detector = new MarkerDetector();
 
-                Size size;
-                cameraMatrix = new Mat(3, 3, Depth.F32, 1);
-                distortion = new Mat(1, 4, Depth.F32, 1);
                 var parametersFileName = CameraParameters;
                 if (!string.IsNullOrEmpty(parametersFileName))
                 {
@@ -72,9 +69,11 @@ namespace Bonsai.Aruco
                         throw new InvalidOperationException("Failed to open the camera parameters at the specified path.");
                     }
 
+                    cameraMatrix = new Mat(3, 3, Depth.F32, 1);
+                    distortion = new Mat(1, 4, Depth.F32, 1);
                     parameters = new CameraParameters();
                     parameters.ReadFromXmlFile(parametersFileName);
-                    parameters.CopyParameters(cameraMatrix, distortion, out size);
+                    parameters.CopyParameters(cameraMatrix, distortion, out _);
                 }
 
                 return source.Select(input =>
