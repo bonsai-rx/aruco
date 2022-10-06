@@ -54,41 +54,42 @@ namespace Bonsai.Aruco
 
         public override IObservable<MarkerFrame> Process(IObservable<IplImage> source)
         {
-            return Observable.Defer(() =>
-            {
-                var detector = new MarkerDetector();
-                CameraParameters parameters = null;
-                Mat cameraMatrix = null;
-                Mat distortion = null;
-
-                var parametersFileName = CameraParameters;
-                if (!string.IsNullOrEmpty(parametersFileName))
+            return Observable.Using(
+                () => new MarkerDetector(),
+                detector =>
                 {
-                    if (!File.Exists(parametersFileName))
+                    CameraParameters parameters = null;
+                    Mat cameraMatrix = null;
+                    Mat distortion = null;
+
+                    var parametersFileName = CameraParameters;
+                    if (!string.IsNullOrEmpty(parametersFileName))
                     {
-                        throw new InvalidOperationException("Failed to open the camera parameters at the specified path.");
+                        if (!File.Exists(parametersFileName))
+                        {
+                            throw new InvalidOperationException("Failed to open the camera parameters at the specified path.");
+                        }
+
+                        cameraMatrix = new Mat(3, 3, Depth.F32, 1);
+                        distortion = new Mat(1, 4, Depth.F32, 1);
+                        parameters = new CameraParameters();
+                        parameters.ReadFromXmlFile(parametersFileName);
+                        parameters.CopyParameters(cameraMatrix, distortion, out _);
                     }
 
-                    cameraMatrix = new Mat(3, 3, Depth.F32, 1);
-                    distortion = new Mat(1, 4, Depth.F32, 1);
-                    parameters = new CameraParameters();
-                    parameters.ReadFromXmlFile(parametersFileName);
-                    parameters.CopyParameters(cameraMatrix, distortion, out _);
-                }
+                    return source.Select(input =>
+                    {
+                        detector.ThresholdMethod = ThresholdMethod;
+                        detector.Param1 = Param1;
+                        detector.Param2 = Param2;
+                        detector.MinSize = MinSize;
+                        detector.MaxSize = MaxSize;
+                        detector.CornerRefinement = CornerRefinement;
 
-                return source.Select(input =>
-                {
-                    detector.ThresholdMethod = ThresholdMethod;
-                    detector.Param1 = Param1;
-                    detector.Param2 = Param2;
-                    detector.MinSize = MinSize;
-                    detector.MaxSize = MaxSize;
-                    detector.CornerRefinement = CornerRefinement;
-
-                    var detectedMarkers = detector.Detect(input, cameraMatrix, distortion, MarkerSize);
-                    return new MarkerFrame(parameters, detectedMarkers);
+                        var detectedMarkers = detector.Detect(input, cameraMatrix, distortion, MarkerSize);
+                        return new MarkerFrame(parameters, detectedMarkers);
+                    });
                 });
-            });
         }
     }
 }
