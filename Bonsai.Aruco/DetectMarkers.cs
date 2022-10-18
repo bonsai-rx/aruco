@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using OpenCV.Net;
-using Bonsai;
 using Aruco.Net;
 using System.ComponentModel;
-using System.Xml.Serialization;
 using System.Reactive.Linq;
 using System.IO;
 
