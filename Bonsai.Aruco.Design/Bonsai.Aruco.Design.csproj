@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Title>Bonsai - ArUco Design Library</Title>
     <Description>Bonsai Design Library containing visualizer and editor classes for ArUco configuration.</Description>
-    <PackageTags>Bonsai Rx Rx ArUco Marker Augmented Reality Visualizers</PackageTags>
+    <PackageTags>Bonsai Rx ArUco Marker Augmented Reality Visualizers</PackageTags>
     <TargetFramework>net462</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <VersionPrefix>3.0.0</VersionPrefix>
