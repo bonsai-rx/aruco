@@ -3,10 +3,7 @@
   <PropertyGroup>
     <Title>Bonsai - ArUco Library</Title>
     <Description>Bonsai Library containing modules for tracking fiducial markers using ArUco.</Description>
-    <PackageTags>Bonsai Rx ArUco Marker Augmented Reality</PackageTags>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <TargetFramework>net462</TargetFramework>
-    <VersionPrefix>3.0.0</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
