@@ -20,7 +20,6 @@ namespace Bonsai.Aruco
             ThresholdMethod = ThresholdMethod.AdaptiveThreshold;
             CornerRefinement = CornerRefinementMethod.Lines;
             MarkerSize = 10;
-            SetYPerpendicular = false;
         }
 
         [FileNameFilter("YAML Files (*.yml)|*.yml|All Files (*.*)|*.*")]
@@ -48,6 +47,7 @@ namespace Bonsai.Aruco
 
         [Description("The size of the marker sides, in meters.")]
         public float MarkerSize { get; set; }
+
         [Description("Whether to set Y as the normal axis of the marker, otherwise Z is used as normal axis.")]
         public bool SetYPerpendicular { get; set; }
 
