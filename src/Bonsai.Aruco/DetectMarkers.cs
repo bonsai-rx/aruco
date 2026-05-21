@@ -48,7 +48,7 @@ namespace Bonsai.Aruco
         [Description("The size of the marker sides, in meters.")]
         public float MarkerSize { get; set; }
 
-        [Description("Whether to set Y as the normal axis of the marker, otherwise Z is used as normal axis.")]
+        [Description("True to use the Y axis as the marker normal; otherwise the Z axis is used.")]
         public bool SetYPerpendicular { get; set; }
 
         public override IObservable<MarkerFrame> Process(IObservable<IplImage> source)
