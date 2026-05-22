@@ -1,4 +1,4 @@
-﻿using Aruco.Net;
+using Aruco.Net;
 using Bonsai;
 using Bonsai.Aruco.Design;
 using Bonsai.Design;
@@ -10,10 +10,14 @@ using System;
 
 namespace Bonsai.Aruco.Design
 {
+    /// <summary>
+    /// Provides a type visualizer that overlays a marker over an existing image visualizer.
+    /// </summary>
     public class MarkerOverlay : DialogTypeVisualizer
     {
         IplImageVisualizer visualizer;
 
+        /// <inheritdoc/>
         public override void Show(object value)
         {
             var marker = (Marker)value;
@@ -24,11 +28,13 @@ namespace Bonsai.Aruco.Design
             }
         }
 
+        /// <inheritdoc/>
         public override void Load(IServiceProvider provider)
         {
             visualizer = (IplImageVisualizer)provider.GetService(typeof(MashupVisualizer));
         }
 
+        /// <inheritdoc/>
         public override void Unload()
         {
         }
