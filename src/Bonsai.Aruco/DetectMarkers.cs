@@ -48,6 +48,9 @@ namespace Bonsai.Aruco
         [Description("The size of the marker sides, in meters.")]
         public float MarkerSize { get; set; }
 
+        [Description("True to use the Y axis as the marker normal; otherwise the Z axis is used.")]
+        public bool SetYPerpendicular { get; set; }
+
         public override IObservable<MarkerFrame> Process(IObservable<IplImage> source)
         {
             return Observable.Using(
@@ -82,7 +85,7 @@ namespace Bonsai.Aruco
                         detector.MaxSize = MaxSize;
                         detector.CornerRefinement = CornerRefinement;
 
-                        var detectedMarkers = detector.Detect(input, cameraMatrix, distortion, MarkerSize);
+                        var detectedMarkers = detector.Detect(input, cameraMatrix, distortion, MarkerSize, SetYPerpendicular);
                         return new MarkerFrame(parameters, detectedMarkers);
                     });
                 });
