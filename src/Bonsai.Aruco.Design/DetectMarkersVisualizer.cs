@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Bonsai.Design;
 using Bonsai.Vision.Design;
@@ -16,6 +16,14 @@ using System.Windows.Forms;
 
 namespace Bonsai.Aruco.Design
 {
+    /// <summary>
+    /// Provides a type visualizer that overlays detected markers on the image processed
+    /// by a <see cref="DetectMarkers"/> operator.
+    /// </summary>
+    /// <remarks>
+    /// Right-clicking the visualizer canvas toggles between displaying the original image
+    /// and the thresholded image used for marker detection.
+    /// </remarks>
     public class DetectMarkersVisualizer : IplImageVisualizer
     {
         IplImage input;
@@ -24,6 +32,7 @@ namespace Bonsai.Aruco.Design
         MarkerDetector imageThreshold;
         DetectMarkers detectMarkers;
 
+        /// <inheritdoc/>
         public override void Show(object value)
         {
             if (input != null)
@@ -62,6 +71,7 @@ namespace Bonsai.Aruco.Design
             }
         }
 
+        /// <inheritdoc/>
         public override void Load(IServiceProvider provider)
         {
             showThreshold = false;
@@ -91,6 +101,7 @@ namespace Bonsai.Aruco.Design
             };
         }
 
+        /// <inheritdoc/>
         public override void Unload()
         {
             if (inputObserver != null)
